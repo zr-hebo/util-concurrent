@@ -29,4 +29,6 @@ func (gc *GroupController) WaitFinish() {
 	for i := 0; i < gc.maxNum; i++ {
 		gc.counter <- struct{}{}
 	}
+
+	close(gc.counter)
 }
