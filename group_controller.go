@@ -24,8 +24,8 @@ func (gc *GroupController) Release() {
 	<-gc.counter
 }
 
-// WaitEmpty wait all channel empty
-func (gc *GroupController) WaitEmpty() {
+// WaitFinish wait all channel empty
+func (gc *GroupController) WaitFinish() {
 	for i := 0; i < gc.maxNum; i++ {
 		gc.counter <- struct{}{}
 	}
