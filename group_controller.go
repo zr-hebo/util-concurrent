@@ -16,6 +16,12 @@ func NewGroupController(num int) (gc *GroupController) {
 
 // Acquire Acquire semaphore
 func (gc *GroupController) Acquire() {
+	if gc.counter == nil {
+		panic(
+			"group controller's counter is nil, " +
+				"this mqy caused by reusing of a group controller")
+	}
+
 	gc.counter <- struct{}{}
 }
 
@@ -31,4 +37,5 @@ func (gc *GroupController) WaitFinish() {
 	}
 
 	close(gc.counter)
+	gc.counter = nil
 }
